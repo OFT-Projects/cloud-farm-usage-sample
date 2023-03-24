@@ -17,6 +17,9 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
+  ModuleDetails: NavigatorScreenParams<ModuleTabParamList> & {
+    module: string;
+  };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -26,10 +29,19 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type RootTabParamList = {
   TabOne: undefined;
-  TabTwo: undefined;
+};
+
+export type ModuleTabParamList = {
+  TabManual: undefined;
+  TabAutomatic: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
+export type ModuleTabScreenProps<Screen extends keyof ModuleTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<ModuleTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
